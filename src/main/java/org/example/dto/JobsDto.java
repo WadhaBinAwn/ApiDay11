@@ -1,5 +1,7 @@
 package org.example.dto;
 
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElementWrapper;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
 import java.sql.ResultSet;
@@ -9,10 +11,10 @@ import java.util.ArrayList;
 @XmlRootElement
 public class JobsDto {
 
-    private int jobId;
+    private int job_id;
 private String job_title;
-    private double minSalary;
-    private double maxSalary;
+    private double min_salary;
+    private double max_salary;
 
     private ArrayList<LinkDto> links = new ArrayList<>();
 
@@ -20,11 +22,11 @@ private String job_title;
     }
 
 
-    public JobsDto(int jobId, double minSalary, double maxSalary, String job_title) {
-        this.jobId = jobId;
+    public JobsDto(int job_id, double min_salary, double max_salary, String job_title) {
+        this.job_id = job_id;
        this.job_title=job_title;
-        this.minSalary = minSalary;
-        this.maxSalary = maxSalary;
+        this.min_salary = min_salary;
+        this.max_salary = max_salary;
     }
 
     public String getJob_title() {
@@ -36,40 +38,39 @@ private String job_title;
     }
 
     public JobsDto(ResultSet rs) throws SQLException {
-        this.jobId = rs.getInt("job_id");
+        this.job_id = rs.getInt("job_id");
 
-        this.minSalary = rs.getDouble("min_salary");
-        this.maxSalary = rs.getDouble("max_salary");
-    }
-
-    public int getJobId() {
-        return jobId;
-    }
-
-    public void setJobId(int jobId) {
-        this.jobId = jobId;
+        this.min_salary = rs.getDouble("min_salary");
+        this.max_salary = rs.getDouble("max_salary");
     }
 
 
+    public int getJob_id() {
+        return job_id;
+    }
 
-
+    public void setJob_id(int job_id) {
+        this.job_id = job_id;
+    }
 
     public double getMinSalary() {
-        return minSalary;
+        return min_salary;
     }
 
-    public void setMinSalary(double minSalary) {
-        this.minSalary = minSalary;
+    public void setMinSalary(double min_salary) {
+        this.min_salary = min_salary;
     }
 
     public double getMaxSalary() {
-        return maxSalary;
+        return max_salary;
     }
 
-    public void setMaxSalary(double maxSalary) {
-        this.maxSalary = maxSalary;
+    public void setMaxSalary(double max_salary) {
+        this.max_salary = max_salary;
     }
 
+    @XmlElementWrapper
+    @XmlElement(name = "link")
     public ArrayList<LinkDto> getLinks() {
         return links;
     }
@@ -84,10 +85,10 @@ private String job_title;
     @Override
     public String toString() {
         return "JobsDto{" +
-                "maxSalary=" + maxSalary +
-                ", minSalary=" + minSalary +
+                "maxSalary=" + max_salary +
+                ", minSalary=" + min_salary +
                 ", job_title='" + job_title + '\'' +
-                ", jobId=" + jobId +
+                ", jobId=" + job_id +
                 '}';
     }
 }
