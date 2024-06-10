@@ -16,6 +16,8 @@ public class EmployeeDAO {
     private static final String DELETE_EMPLOYS = "delete from employees where employee_id = ?";
 
 
+    private static final String SELECT_NAME_EMPLOYS = "select * from employees where first_name = ?";
+
 
     private static final String SELECT_employees_WITH_ID = "select * from employees where employee_id = ?";
     private static final String SELECT_employees_WITH_ID_PAGINATION = "select * from employees where employee_id = ? order by employee_id limit ? offset ?";
@@ -130,6 +132,24 @@ st = conn.prepareStatement(SELECT_employees_WITH_ID_PAGINATION);
         String query = "SELECT * FROM employees WHERE job_id = ?";
         PreparedStatement st = conn.prepareStatement(query);
         st.setInt(1, jobId);
+        ResultSet rs = st.executeQuery();
+
+        ArrayList<Employees> employees = new ArrayList<>();
+        while (rs.next()) {
+            employees.add(new Employees(rs));
+        }
+
+        return employees;
+    }
+
+
+
+    public ArrayList<Employees> selectEmployeesByFirstName(String first_name) throws ClassNotFoundException, SQLException {
+        Class.forName("org.sqlite.JDBC");
+        Connection conn = DriverManager.getConnection(URL);
+        String query = "SELECT * FROM employees WHERE first_name =?";
+        PreparedStatement st = conn.prepareStatement(query);
+        st.setString(1, first_name);
         ResultSet rs = st.executeQuery();
 
         ArrayList<Employees> employees = new ArrayList<>();

@@ -8,7 +8,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
 
-@Mapper
+@Mapper(uses = {EmployeesMapper.class}, imports = {java.util.UUID.class}, componentModel = "cdi")
 public interface JobsMapper {
     JobsMapper INSTANCE = Mappers.getMapper(JobsMapper.class);
 

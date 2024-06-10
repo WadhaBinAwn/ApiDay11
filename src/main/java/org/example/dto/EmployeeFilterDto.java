@@ -18,6 +18,19 @@ public class EmployeeFilterDto {
     @QueryParam("jobId") // Query parameter for job ID
     private Integer jobId;
 
+
+    @QueryParam("first_name") // Query parameter for job ID
+    private Integer first_name;
+
+
+    public Integer getFirst_name() {
+        return first_name;
+    }
+
+    public void setFirst_name(Integer first_name) {
+        this.first_name = first_name;
+    }
+
     public Integer getEmployeeId() {
         return employeeId;
     }

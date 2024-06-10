@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.*;
 import org.example.dao.JobDAO;
@@ -24,6 +25,11 @@ public class JobController {
 
     @Context
     private HttpHeaders headers;
+
+
+
+    @Inject
+    JobsMapper mapper;
 
     @GET
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, "text/csv"})
@@ -59,7 +65,8 @@ public class JobController {
             if (job == null) {
                 throw new DataNotFoundException("Job with ID " + jobId + " not found");
             }
-            JobsDto dto = JobsMapper.INSTANCE.toJobsDto(job);
+//            JobsDto dto = JobsMapper.INSTANCE.toJobsDto(job);
+            JobsDto dto = mapper.toJobsDto(job);
             addLink(dto);
             return Response.ok(dto).build();
         } catch (ClassNotFoundException e) {
@@ -76,7 +83,8 @@ public class JobController {
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Response insertJob(JobsDto dto) {
         try {
-            Jobs job = JobsMapper.INSTANCE.toModel(dto);
+//            Jobs job = JobsMapper.INSTANCE.toModel(dto);
+            Jobs job = mapper.toModel(dto);
             System.out.println(job);
             dao.insertJob(job);
             NewCookie cookie = (new NewCookie.Builder("username")).value("Wadha").build();

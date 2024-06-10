@@ -3,10 +3,11 @@ package org.example.dao;
 import org.example.models.Jobs;
 import org.example.dto.JobsFilterDto;
 
+import java.io.Serializable;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class JobDAO {
+public class JobDAO implements Serializable {
 
     private static final String URL = "jdbc:sqlite:C:\\Users\\dev\\IdeaProjects\\HrApiDay09\\src\\main\\resources\\hr.db";
     private static final String SELECT_ALL_JOBS = "select * from jobs";
