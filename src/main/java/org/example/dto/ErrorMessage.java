@@ -17,8 +17,7 @@ public class ErrorMessage {
     public int getErrorCode() {
         return errorCode;
     }
-
-    public void setErrorCode(int errorCode) {
+     public void setErrorCode(int errorCode) {
         this.errorCode = errorCode;
     }
 
